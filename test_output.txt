@@ -1,1 +1,8 @@
-Cases: 1  Tried: 0  Errors: 0  Failures: 0                                          Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+BSTTests.hs:23:20: error: [GHC-88464]
+    Variable not in scope:
+      insert :: t0 -> String -> BST key0 item0 -> BST key1 String
+    Suggested fix: Perhaps use ‘assert’ (imported from Test.HUnit)
+   |
+23 |         (lookup 1 (insert 1 "one" empty)))
+   |                    ^^^^^^

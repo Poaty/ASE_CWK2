@@ -16,5 +16,9 @@ allTests :: Test
 allTests = TestList [
     TestCase (assertEqual "lookup on an empty tree returns Nothing"
         Nothing
-        (lookup 1 (empty :: BST Int String)))
+        (lookup 1 (empty :: BST Int String))),
+
+    TestCase (assertEqual "lookup after a single insert returns Just the item"
+        (Just "one")
+        (lookup 1 (insert 1 "one" empty)))
   ]
