@@ -1,1 +1,6 @@
-Cases: 2  Tried: 0  Errors: 0  Failures: 0Cases: 2  Tried: 1  Errors: 0  Failures: 0                                          Cases: 2  Tried: 2  Errors: 0  Failures: 0
+Cases: 3  Tried: 0  Errors: 0  Failures: 0Cases: 3  Tried: 1  Errors: 0  Failures: 0Cases: 3  Tried: 2  Errors: 0  Failures: 0                                          ### Failure in: 2
+BSTTests.hs:25
+lookup of an absent key in a single-node tree returns Nothing
+expected: Nothing
+ but got: Just "one"
+Cases: 3  Tried: 3  Errors: 0  Failures: 1
