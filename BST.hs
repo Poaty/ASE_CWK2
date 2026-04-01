@@ -28,10 +28,11 @@ insert newKey newItem oldTree = InternalNode newKey newItem Leaf Leaf
 
 -- Look up a key in the BST.
 -- Returns Just the associated item if the key exists, Nothing otherwise.
--- Cycle 2 minimum: a non-empty tree always returns its root's item,
--- ignoring whether the sought key actually matches. Cycle 3 will force
--- the key-comparison logic.
-lookup :: key -> BST key item -> Maybe item
+-- Cycle 3: now compares the sought key with the current node's key.
+-- A future cycle will force recursion into the left/right subtrees.
+lookup :: Eq key => key -> BST key item -> Maybe item
 lookup soughtKey Leaf = Nothing
 lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
-    = Just currentItem
+    = if soughtKey == currentKey
+         then Just currentItem
+         else Nothing
