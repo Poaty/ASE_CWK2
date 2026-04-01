@@ -24,5 +24,13 @@ allTests = TestList [
 
     TestCase (assertEqual "lookup of an absent key in a single-node tree returns Nothing"
         Nothing
-        (lookup 2 (insert 1 "one" empty) :: Maybe String))
+        (lookup 2 (insert 1 "one" empty) :: Maybe String)),
+
+    TestCase (assertEqual "after smaller-key second insert, root key still retrievable"
+        (Just "ten")
+        (lookup 10 (insert 5 "five" (insert 10 "ten" empty)))),
+
+    TestCase (assertEqual "after smaller-key second insert, smaller key is retrievable"
+        (Just "five")
+        (lookup 5 (insert 5 "five" (insert 10 "ten" empty))))
   ]
