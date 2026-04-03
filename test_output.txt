@@ -1,6 +1,1 @@
-Cases: 7  Tried: 0  Errors: 0  Failures: 0Cases: 7  Tried: 1  Errors: 0  Failures: 0Cases: 7  Tried: 2  Errors: 0  Failures: 0Cases: 7  Tried: 3  Errors: 0  Failures: 0Cases: 7  Tried: 4  Errors: 0  Failures: 0Cases: 7  Tried: 5  Errors: 0  Failures: 0Cases: 7  Tried: 6  Errors: 0  Failures: 0                                          ### Failure in: 6
-BSTTests.hs:41
-after larger-key second insert, larger key is retrievable
-expected: Just "twenty"
- but got: Nothing
-Cases: 7  Tried: 7  Errors: 0  Failures: 1
+Cases: 7  Tried: 0  Errors: 0  Failures: 0Cases: 7  Tried: 1  Errors: 0  Failures: 0Cases: 7  Tried: 2  Errors: 0  Failures: 0Cases: 7  Tried: 3  Errors: 0  Failures: 0Cases: 7  Tried: 4  Errors: 0  Failures: 0Cases: 7  Tried: 5  Errors: 0  Failures: 0Cases: 7  Tried: 6  Errors: 0  Failures: 0                                          Cases: 7  Tried: 7  Errors: 0  Failures: 0
