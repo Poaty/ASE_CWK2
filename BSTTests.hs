@@ -32,5 +32,13 @@ allTests = TestList [
 
     TestCase (assertEqual "after smaller-key second insert, smaller key is retrievable"
         (Just "five")
-        (lookup 5 (insert 5 "five" (insert 10 "ten" empty))))
+        (lookup 5 (insert 5 "five" (insert 10 "ten" empty)))),
+
+    TestCase (assertEqual "after larger-key second insert, root key still retrievable"
+        (Just "ten")
+        (lookup 10 (insert 20 "twenty" (insert 10 "ten" empty)))),
+
+    TestCase (assertEqual "after larger-key second insert, larger key is retrievable"
+        (Just "twenty")
+        (lookup 20 (insert 20 "twenty" (insert 10 "ten" empty))))
   ]
