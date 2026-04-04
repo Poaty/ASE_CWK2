@@ -40,5 +40,9 @@ allTests = TestList [
 
     TestCase (assertEqual "after larger-key second insert, larger key is retrievable"
         (Just "twenty")
-        (lookup 20 (insert 20 "twenty" (insert 10 "ten" empty))))
+        (lookup 20 (insert 20 "twenty" (insert 10 "ten" empty)))),
+
+    TestCase (assertEqual "re-inserting the same key overwrites the existing item"
+        (Just "uno")
+        (lookup 1 (insert 1 "uno" (insert 1 "one" empty))))
   ]

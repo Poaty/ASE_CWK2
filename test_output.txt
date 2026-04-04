@@ -1,1 +1,6 @@
-Cases: 7  Tried: 0  Errors: 0  Failures: 0Cases: 7  Tried: 1  Errors: 0  Failures: 0Cases: 7  Tried: 2  Errors: 0  Failures: 0Cases: 7  Tried: 3  Errors: 0  Failures: 0Cases: 7  Tried: 4  Errors: 0  Failures: 0Cases: 7  Tried: 5  Errors: 0  Failures: 0Cases: 7  Tried: 6  Errors: 0  Failures: 0                                          Cases: 7  Tried: 7  Errors: 0  Failures: 0
+Cases: 8  Tried: 0  Errors: 0  Failures: 0Cases: 8  Tried: 1  Errors: 0  Failures: 0Cases: 8  Tried: 2  Errors: 0  Failures: 0Cases: 8  Tried: 3  Errors: 0  Failures: 0Cases: 8  Tried: 4  Errors: 0  Failures: 0Cases: 8  Tried: 5  Errors: 0  Failures: 0Cases: 8  Tried: 6  Errors: 0  Failures: 0Cases: 8  Tried: 7  Errors: 0  Failures: 0                                          ### Failure in: 7
+BSTTests.hs:45
+re-inserting the same key overwrites the existing item
+expected: Just "uno"
+ but got: Just "one"
+Cases: 8  Tried: 8  Errors: 0  Failures: 1
