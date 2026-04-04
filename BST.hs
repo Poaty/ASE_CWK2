@@ -34,7 +34,7 @@ insert newKey newItem (InternalNode currentKey currentItem leftChild rightChild)
                   then InternalNode currentKey currentItem
                                     leftChild
                                     (insert newKey newItem rightChild)
-                  else InternalNode currentKey currentItem leftChild rightChild
+                  else InternalNode newKey newItem leftChild rightChild
 
 
 -- Look up a key in the BST.
