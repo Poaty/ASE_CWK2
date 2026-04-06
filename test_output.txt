@@ -1,1 +1,6 @@
-Cases: 8  Tried: 0  Errors: 0  Failures: 0Cases: 8  Tried: 1  Errors: 0  Failures: 0Cases: 8  Tried: 2  Errors: 0  Failures: 0Cases: 8  Tried: 3  Errors: 0  Failures: 0Cases: 8  Tried: 4  Errors: 0  Failures: 0Cases: 8  Tried: 5  Errors: 0  Failures: 0Cases: 8  Tried: 6  Errors: 0  Failures: 0Cases: 8  Tried: 7  Errors: 0  Failures: 0                                          Cases: 8  Tried: 8  Errors: 0  Failures: 0
+
+BSTTests.hs:51:10: error: [GHC-88464]
+    Variable not in scope: displayEntries :: BST Int String -> String
+   |
+51 |         (displayEntries (empty :: BST Int String)))
+   |          ^^^^^^^^^^^^^^

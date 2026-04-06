@@ -44,5 +44,9 @@ allTests = TestList [
 
     TestCase (assertEqual "re-inserting the same key overwrites the existing item"
         (Just "uno")
-        (lookup 1 (insert 1 "uno" (insert 1 "one" empty))))
+        (lookup 1 (insert 1 "uno" (insert 1 "one" empty)))),
+
+    TestCase (assertEqual "displayEntries on an empty tree returns the empty string"
+        ""
+        (displayEntries (empty :: BST Int String)))
   ]
