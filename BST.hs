@@ -49,3 +49,10 @@ lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
          else if soughtKey > currentKey
                   then lookup soughtKey rightChild
                   else Just currentItem
+
+
+-- Render every entry in the BST as a string in ascending key order.
+-- Cycle 7 minimum: any tree renders as the empty string. Cycle 8 will
+-- force the actual in-order traversal of a non-empty tree.
+displayEntries :: BST key item -> String
+displayEntries anyTree = ""
