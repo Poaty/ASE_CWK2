@@ -52,5 +52,9 @@ allTests = TestList [
 
     TestCase (assertEqual "displayEntries renders entries in ascending key order"
         "5: \"five\"\n10: \"ten\"\n15: \"fifteen\"\n"
-        (displayEntries (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty)))))
+        (displayEntries (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "remove on an empty tree leaves it empty"
+        Nothing
+        (lookup 1 (remove 1 (empty :: BST Int String))))
   ]
