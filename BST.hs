@@ -52,7 +52,13 @@ lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
 
 
 -- Render every entry in the BST as a string in ascending key order.
--- Cycle 7 minimum: any tree renders as the empty string. Cycle 8 will
--- force the actual in-order traversal of a non-empty tree.
-displayEntries :: BST key item -> String
-displayEntries anyTree = ""
+-- Cycle 8: performs an in-order traversal (left subtree, this node,
+-- right subtree). Because of the BST invariant this naturally yields
+-- the entries in ascending order of key. Each entry is rendered as
+-- "<key>: <item>\n".
+displayEntries :: (Show key, Show item) => BST key item -> String
+displayEntries Leaf = ""
+displayEntries (InternalNode currentKey currentItem leftChild rightChild)
+    = displayEntries leftChild
+      ++ show currentKey ++ ": " ++ show currentItem ++ "\n"
+      ++ displayEntries rightChild
