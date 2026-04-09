@@ -1,7 +1,1 @@
-
-BSTTests.hs:59:20: error: [GHC-88464]
-    Variable not in scope:
-      remove :: t0 -> BST Int String -> BST key8 a0
-   |
-59 |         (lookup 1 (remove 1 (empty :: BST Int String))))
-   |                    ^^^^^^
+Cases: 11  Tried: 0  Errors: 0  Failures: 0Cases: 11  Tried: 1  Errors: 0  Failures: 0Cases: 11  Tried: 2  Errors: 0  Failures: 0Cases: 11  Tried: 3  Errors: 0  Failures: 0Cases: 11  Tried: 4  Errors: 0  Failures: 0Cases: 11  Tried: 5  Errors: 0  Failures: 0Cases: 11  Tried: 6  Errors: 0  Failures: 0Cases: 11  Tried: 7  Errors: 0  Failures: 0Cases: 11  Tried: 8  Errors: 0  Failures: 0Cases: 11  Tried: 9  Errors: 0  Failures: 0Cases: 11  Tried: 10  Errors: 0  Failures: 0                                            Cases: 11  Tried: 11  Errors: 0  Failures: 0

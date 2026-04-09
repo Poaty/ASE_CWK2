@@ -62,3 +62,11 @@ displayEntries (InternalNode currentKey currentItem leftChild rightChild)
     = displayEntries leftChild
       ++ show currentKey ++ ": " ++ show currentItem ++ "\n"
       ++ displayEntries rightChild
+
+
+-- Remove the entry with the given key, returning the resulting tree.
+-- If the key is not present, the tree is returned unchanged.
+-- Cycle 9 minimum: every removal is a no-op. Subsequent cycles will
+-- drive the actual removal logic for each structural case.
+remove :: key -> BST key item -> BST key item
+remove keyToRemove anyTree = anyTree
