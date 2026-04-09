@@ -56,5 +56,9 @@ allTests = TestList [
 
     TestCase (assertEqual "remove on an empty tree leaves it empty"
         Nothing
-        (lookup 1 (remove 1 (empty :: BST Int String))))
+        (lookup 1 (remove 1 (empty :: BST Int String)))),
+
+    TestCase (assertEqual "remove the only entry from a single-node tree leaves it empty"
+        Nothing
+        (lookup 1 (remove 1 (insert 1 "one" empty)) :: Maybe String))
   ]
