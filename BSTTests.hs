@@ -60,5 +60,13 @@ allTests = TestList [
 
     TestCase (assertEqual "remove the only entry from a single-node tree leaves it empty"
         Nothing
-        (lookup 1 (remove 1 (insert 1 "one" empty)) :: Maybe String))
+        (lookup 1 (remove 1 (insert 1 "one" empty)) :: Maybe String)),
+
+    TestCase (assertEqual "remove of a non-root key removes that entry from the subtree"
+        Nothing
+        (lookup 5 (remove 5 (insert 5 "five" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "remove of a non-root key leaves the other entry in place"
+        (Just "ten")
+        (lookup 10 (remove 5 (insert 5 "five" (insert 10 "ten" empty)))))
   ]
