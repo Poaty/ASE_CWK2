@@ -66,7 +66,13 @@ displayEntries (InternalNode currentKey currentItem leftChild rightChild)
 
 -- Remove the entry with the given key, returning the resulting tree.
 -- If the key is not present, the tree is returned unchanged.
--- Cycle 9 minimum: every removal is a no-op. Subsequent cycles will
--- drive the actual removal logic for each structural case.
-remove :: key -> BST key item -> BST key item
-remove keyToRemove anyTree = anyTree
+-- Cycle 10: an empty tree stays empty; a node whose key matches the
+-- key being removed is replaced by a Leaf (leaf-removal case).
+-- Recursion into subtrees and the partial-child / two-children cases
+-- will be driven by subsequent cycles.
+remove :: Eq key => key -> BST key item -> BST key item
+remove keyToRemove Leaf = Leaf
+remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
+    = if keyToRemove == currentKey
+         then Leaf
+         else InternalNode currentKey currentItem leftChild rightChild
