@@ -68,5 +68,13 @@ allTests = TestList [
 
     TestCase (assertEqual "remove of a non-root key leaves the other entry in place"
         (Just "ten")
-        (lookup 10 (remove 5 (insert 5 "five" (insert 10 "ten" empty)))))
+        (lookup 10 (remove 5 (insert 5 "five" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "remove root with only a right child: removed key is gone"
+        Nothing
+        (lookup 10 (remove 10 (insert 20 "twenty" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "remove root with only a right child: right subtree survives"
+        (Just "twenty")
+        (lookup 20 (remove 10 (insert 20 "twenty" (insert 10 "ten" empty)))))
   ]
