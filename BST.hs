@@ -86,9 +86,10 @@ remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
 
 
 -- Helper: combine the two subtrees of a node that is being removed.
--- Cycle 12 minimum: if the left subtree is a Leaf, promote the right
--- subtree (this also handles the leaf-removal case where both are Leaf).
--- Cycle 13 and 14 will drive the no-right and two-children cases.
+-- Cycle 13: if either subtree is a Leaf, promote the other one (this
+-- also handles the leaf-removal case where both are Leaf). Cycle 14
+-- will drive the two-children case.
 removeCurrent :: BST key item -> BST key item -> BST key item
 removeCurrent Leaf rightChild = rightChild
+removeCurrent leftChild Leaf  = leftChild
 removeCurrent leftChild rightChild = Leaf
