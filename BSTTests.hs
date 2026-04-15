@@ -84,5 +84,21 @@ allTests = TestList [
 
     TestCase (assertEqual "remove root with only a left child: left subtree survives"
         (Just "five")
-        (lookup 5 (remove 10 (insert 5 "five" (insert 10 "ten" empty)))))
+        (lookup 5 (remove 10 (insert 5 "five" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "remove root with two children: removed key is gone"
+        Nothing
+        (lookup 10 (remove 10 (insert 15 "fifteen" (insert 5 "five" (insert 10 "ten" empty)))))),
+
+    TestCase (assertEqual "remove root with two children: left subtree survives"
+        (Just "five")
+        (lookup 5 (remove 10 (insert 15 "fifteen" (insert 5 "five" (insert 10 "ten" empty)))))),
+
+    TestCase (assertEqual "remove root with two children: right subtree survives"
+        (Just "fifteen")
+        (lookup 15 (remove 10 (insert 15 "fifteen" (insert 5 "five" (insert 10 "ten" empty)))))),
+
+    TestCase (assertEqual "remove root with two children: remaining entries are still in order"
+        "5: \"five\"\n15: \"fifteen\"\n"
+        (displayEntries (remove 10 (insert 15 "fifteen" (insert 5 "five" (insert 10 "ten" empty))))))
   ]
