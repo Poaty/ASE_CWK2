@@ -19,10 +19,10 @@ empty = Leaf
 
 
 -- Insert a (key, item) entry into the BST.
--- Cycle 5: a Leaf becomes a fresh single-node tree. Otherwise the new
--- key is compared with the current node's key and the entry is recursed
--- into the appropriate subtree (left for smaller, right for larger).
--- The equal-key case is left for Cycle 6 to drive.
+-- A Leaf becomes a fresh single-node tree. Otherwise the new key is
+-- compared with the current node's key: if smaller the entry is
+-- recursed into the left subtree, if larger into the right subtree,
+-- and if equal the existing entry's item is overwritten.
 insert :: Ord key => key -> item -> BST key item -> BST key item
 insert newKey newItem Leaf = InternalNode newKey newItem Leaf Leaf
 insert newKey newItem (InternalNode currentKey currentItem leftChild rightChild)
@@ -39,8 +39,8 @@ insert newKey newItem (InternalNode currentKey currentItem leftChild rightChild)
 
 -- Look up a key in the BST.
 -- Returns Just the associated item if the key exists, Nothing otherwise.
--- Cycle 5: recurses into the appropriate subtree based on the comparison
--- between the sought key and the current node's key.
+-- Recurses into the appropriate subtree based on the comparison between
+-- the sought key and the current node's key.
 lookup :: Ord key => key -> BST key item -> Maybe item
 lookup soughtKey Leaf = Nothing
 lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
@@ -52,9 +52,9 @@ lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
 
 
 -- Render every entry in the BST as a string in ascending key order.
--- Cycle 8: performs an in-order traversal (left subtree, this node,
--- right subtree). Because of the BST invariant this naturally yields
--- the entries in ascending order of key. Each entry is rendered as
+-- Performs an in-order traversal (left subtree, this node, right
+-- subtree). Because of the BST invariant this naturally yields the
+-- entries in ascending order of key. Each entry is rendered as
 -- "<key>: <item>\n".
 displayEntries :: (Show key, Show item) => BST key item -> String
 displayEntries Leaf = ""
@@ -66,11 +66,9 @@ displayEntries (InternalNode currentKey currentItem leftChild rightChild)
 
 -- Remove the entry with the given key, returning the resulting tree.
 -- If the key is not present, the tree is returned unchanged.
--- Cycle 11: when the key being removed is NOT at the current node, we
--- recurse into the appropriate subtree based on comparison with the
--- current key. A matching node is still replaced by a Leaf (leaf-
--- removal case from Cycle 10). The partial-child / two-children match
--- cases will be driven by subsequent cycles.
+-- For a non-matching node we recurse into the appropriate subtree.
+-- For the matching node we delegate to removeCurrent, which deals
+-- with the four structural cases (leaf, only left, only right, both).
 remove :: Ord key => key -> BST key item -> BST key item
 remove keyToRemove Leaf = Leaf
 remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
