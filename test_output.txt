@@ -1,16 +1,1 @@
-Cases: 22  Tried: 0  Errors: 0  Failures: 0Cases: 22  Tried: 1  Errors: 0  Failures: 0Cases: 22  Tried: 2  Errors: 0  Failures: 0Cases: 22  Tried: 3  Errors: 0  Failures: 0Cases: 22  Tried: 4  Errors: 0  Failures: 0Cases: 22  Tried: 5  Errors: 0  Failures: 0Cases: 22  Tried: 6  Errors: 0  Failures: 0Cases: 22  Tried: 7  Errors: 0  Failures: 0Cases: 22  Tried: 8  Errors: 0  Failures: 0Cases: 22  Tried: 9  Errors: 0  Failures: 0Cases: 22  Tried: 10  Errors: 0  Failures: 0Cases: 22  Tried: 11  Errors: 0  Failures: 0Cases: 22  Tried: 12  Errors: 0  Failures: 0Cases: 22  Tried: 13  Errors: 0  Failures: 0Cases: 22  Tried: 14  Errors: 0  Failures: 0Cases: 22  Tried: 15  Errors: 0  Failures: 0Cases: 22  Tried: 16  Errors: 0  Failures: 0Cases: 22  Tried: 17  Errors: 0  Failures: 0Cases: 22  Tried: 18  Errors: 0  Failures: 0Cases: 22  Tried: 19  Errors: 0  Failures: 0                                            ### Failure in: 19
-BSTTests.hs:93
-remove root with two children: left subtree survives
-expected: Just "five"
- but got: Nothing
-Cases: 22  Tried: 20  Errors: 0  Failures: 1                                            ### Failure in: 20
-BSTTests.hs:97
-remove root with two children: right subtree survives
-expected: Just "fifteen"
- but got: Nothing
-Cases: 22  Tried: 21  Errors: 0  Failures: 2                                            ### Failure in: 21
-BSTTests.hs:101
-remove root with two children: remaining entries are still in order
-expected: "5: \"five\"\n15: \"fifteen\"\n"
- but got: ""
-Cases: 22  Tried: 22  Errors: 0  Failures: 3
+Cases: 22  Tried: 0  Errors: 0  Failures: 0Cases: 22  Tried: 1  Errors: 0  Failures: 0Cases: 22  Tried: 2  Errors: 0  Failures: 0Cases: 22  Tried: 3  Errors: 0  Failures: 0Cases: 22  Tried: 4  Errors: 0  Failures: 0Cases: 22  Tried: 5  Errors: 0  Failures: 0Cases: 22  Tried: 6  Errors: 0  Failures: 0Cases: 22  Tried: 7  Errors: 0  Failures: 0Cases: 22  Tried: 8  Errors: 0  Failures: 0Cases: 22  Tried: 9  Errors: 0  Failures: 0Cases: 22  Tried: 10  Errors: 0  Failures: 0Cases: 22  Tried: 11  Errors: 0  Failures: 0Cases: 22  Tried: 12  Errors: 0  Failures: 0Cases: 22  Tried: 13  Errors: 0  Failures: 0Cases: 22  Tried: 14  Errors: 0  Failures: 0Cases: 22  Tried: 15  Errors: 0  Failures: 0Cases: 22  Tried: 16  Errors: 0  Failures: 0Cases: 22  Tried: 17  Errors: 0  Failures: 0Cases: 22  Tried: 18  Errors: 0  Failures: 0Cases: 22  Tried: 19  Errors: 0  Failures: 0Cases: 22  Tried: 20  Errors: 0  Failures: 0Cases: 22  Tried: 21  Errors: 0  Failures: 0                                            Cases: 22  Tried: 22  Errors: 0  Failures: 0

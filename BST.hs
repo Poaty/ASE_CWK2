@@ -86,10 +86,27 @@ remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
 
 
 -- Helper: combine the two subtrees of a node that is being removed.
--- Cycle 13: if either subtree is a Leaf, promote the other one (this
--- also handles the leaf-removal case where both are Leaf). Cycle 14
--- will drive the two-children case.
+-- If either subtree is a Leaf the other one is promoted (this also
+-- handles the leaf-removal case where both are Leaf). When both
+-- subtrees are non-empty we replace the removed node with its in-order
+-- successor (the smallest-keyed entry in the right subtree), and that
+-- entry is removed from the right subtree to avoid duplicating it.
 removeCurrent :: BST key item -> BST key item -> BST key item
 removeCurrent Leaf rightChild = rightChild
 removeCurrent leftChild Leaf  = leftChild
-removeCurrent leftChild rightChild = Leaf
+removeCurrent leftChild rightChild
+    = let (successorKey, successorItem, rightWithoutMin) = popMin rightChild
+       in InternalNode successorKey successorItem leftChild rightWithoutMin
+
+
+-- Helper: remove the leftmost (smallest-key) entry from a non-empty
+-- BST. Returns the popped entry's key, its item, and the tree with that
+-- entry removed. Used to find the in-order successor when removing a
+-- node that has both children.
+-- Precondition: the input tree must be non-empty.
+popMin :: BST key item -> (key, item, BST key item)
+popMin (InternalNode currentKey currentItem Leaf rightChild)
+    = (currentKey, currentItem, rightChild)
+popMin (InternalNode currentKey currentItem leftChild rightChild)
+    = let (minKey, minItem, leftWithoutMin) = popMin leftChild
+       in (minKey, minItem, InternalNode currentKey currentItem leftWithoutMin rightChild)
