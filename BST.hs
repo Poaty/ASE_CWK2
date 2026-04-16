@@ -26,13 +26,14 @@ empty = Leaf
 insert :: Ord key => key -> item -> BST key item -> BST key item
 insert newKey newItem Leaf = InternalNode newKey newItem Leaf Leaf
 insert newKey newItem (InternalNode currentKey currentItem leftChild rightChild)
-    | newKey < currentKey = InternalNode currentKey currentItem
-                                         (insert newKey newItem leftChild)
-                                         rightChild
-    | newKey > currentKey = InternalNode currentKey currentItem
-                                         leftChild
-                                         (insert newKey newItem rightChild)
-    | otherwise           = InternalNode newKey newItem leftChild rightChild
+    | newKey < currentKey =
+        let newLeftChild = insert newKey newItem leftChild
+         in InternalNode currentKey currentItem newLeftChild rightChild
+    | newKey > currentKey =
+        let newRightChild = insert newKey newItem rightChild
+         in InternalNode currentKey currentItem leftChild newRightChild
+    | otherwise =
+        InternalNode newKey newItem leftChild rightChild
 
 
 -- Look up a key in the BST.
@@ -68,13 +69,14 @@ displayEntries (InternalNode currentKey currentItem leftChild rightChild)
 remove :: Ord key => key -> BST key item -> BST key item
 remove keyToRemove Leaf = Leaf
 remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
-    | keyToRemove < currentKey = InternalNode currentKey currentItem
-                                              (remove keyToRemove leftChild)
-                                              rightChild
-    | keyToRemove > currentKey = InternalNode currentKey currentItem
-                                              leftChild
-                                              (remove keyToRemove rightChild)
-    | otherwise                = removeCurrent leftChild rightChild
+    | keyToRemove < currentKey =
+        let newLeftChild = remove keyToRemove leftChild
+         in InternalNode currentKey currentItem newLeftChild rightChild
+    | keyToRemove > currentKey =
+        let newRightChild = remove keyToRemove rightChild
+         in InternalNode currentKey currentItem leftChild newRightChild
+    | otherwise =
+        removeCurrent leftChild rightChild
 
 
 -- Helper: combine the two subtrees of a node that is being removed.
