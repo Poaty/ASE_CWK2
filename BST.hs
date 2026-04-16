@@ -26,15 +26,13 @@ empty = Leaf
 insert :: Ord key => key -> item -> BST key item -> BST key item
 insert newKey newItem Leaf = InternalNode newKey newItem Leaf Leaf
 insert newKey newItem (InternalNode currentKey currentItem leftChild rightChild)
-    = if newKey < currentKey
-         then InternalNode currentKey currentItem
-                           (insert newKey newItem leftChild)
-                           rightChild
-         else if newKey > currentKey
-                  then InternalNode currentKey currentItem
-                                    leftChild
-                                    (insert newKey newItem rightChild)
-                  else InternalNode newKey newItem leftChild rightChild
+    | newKey < currentKey = InternalNode currentKey currentItem
+                                         (insert newKey newItem leftChild)
+                                         rightChild
+    | newKey > currentKey = InternalNode currentKey currentItem
+                                         leftChild
+                                         (insert newKey newItem rightChild)
+    | otherwise           = InternalNode newKey newItem leftChild rightChild
 
 
 -- Look up a key in the BST.
@@ -44,11 +42,9 @@ insert newKey newItem (InternalNode currentKey currentItem leftChild rightChild)
 lookup :: Ord key => key -> BST key item -> Maybe item
 lookup soughtKey Leaf = Nothing
 lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
-    = if soughtKey < currentKey
-         then lookup soughtKey leftChild
-         else if soughtKey > currentKey
-                  then lookup soughtKey rightChild
-                  else Just currentItem
+    | soughtKey < currentKey = lookup soughtKey leftChild
+    | soughtKey > currentKey = lookup soughtKey rightChild
+    | otherwise              = Just currentItem
 
 
 -- Render every entry in the BST as a string in ascending key order.
@@ -72,15 +68,13 @@ displayEntries (InternalNode currentKey currentItem leftChild rightChild)
 remove :: Ord key => key -> BST key item -> BST key item
 remove keyToRemove Leaf = Leaf
 remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
-    = if keyToRemove < currentKey
-         then InternalNode currentKey currentItem
-                           (remove keyToRemove leftChild)
-                           rightChild
-         else if keyToRemove > currentKey
-                  then InternalNode currentKey currentItem
-                                    leftChild
-                                    (remove keyToRemove rightChild)
-                  else removeCurrent leftChild rightChild
+    | keyToRemove < currentKey = InternalNode currentKey currentItem
+                                              (remove keyToRemove leftChild)
+                                              rightChild
+    | keyToRemove > currentKey = InternalNode currentKey currentItem
+                                              leftChild
+                                              (remove keyToRemove rightChild)
+    | otherwise                = removeCurrent leftChild rightChild
 
 
 -- Helper: combine the two subtrees of a node that is being removed.
