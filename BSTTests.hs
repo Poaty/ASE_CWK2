@@ -100,5 +100,9 @@ allTests = TestList [
 
     TestCase (assertEqual "remove root with two children: remaining entries are still in order"
         "5: \"five\"\n15: \"fifteen\"\n"
-        (displayEntries (remove 10 (insert 15 "fifteen" (insert 5 "five" (insert 10 "ten" empty))))))
+        (displayEntries (remove 10 (insert 15 "fifteen" (insert 5 "five" (insert 10 "ten" empty)))))),
+
+    TestCase (assertEqual "countMatching on an empty tree returns 0"
+        0
+        (countMatching (\_ _ -> True) (empty :: BST Int String)))
   ]
