@@ -109,5 +109,10 @@ allTests = TestList [
     TestCase (assertEqual "countMatching with an always-true predicate returns the total entry count"
         3
         (countMatching (\_ _ -> True)
+                       (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "countMatching counts only the entries for which the predicate returns True"
+        2
+        (countMatching (\currentKey _ -> currentKey > 7)
                        (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty)))))
   ]
