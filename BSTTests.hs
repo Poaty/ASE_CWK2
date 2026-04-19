@@ -104,5 +104,10 @@ allTests = TestList [
 
     TestCase (assertEqual "countMatching on an empty tree returns 0"
         0
-        (countMatching (\_ _ -> True) (empty :: BST Int String)))
+        (countMatching (\_ _ -> True) (empty :: BST Int String))),
+
+    TestCase (assertEqual "countMatching with an always-true predicate returns the total entry count"
+        3
+        (countMatching (\_ _ -> True)
+                       (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty)))))
   ]
