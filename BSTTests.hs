@@ -114,5 +114,9 @@ allTests = TestList [
     TestCase (assertEqual "countMatching counts only the entries for which the predicate returns True"
         2
         (countMatching (\currentKey _ -> currentKey > 7)
-                       (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty)))))
+                       (insert 5 "five" (insert 15 "fifteen" (insert 10 "ten" empty))))),
+
+    TestCase (assertEqual "rotateRight promotes the left child to the root"
+        (InternalNode 5 "five" Leaf (InternalNode 10 "ten" Leaf Leaf))
+        (rotateRight (insert 5 "five" (insert 10 "ten" empty))))
   ]
