@@ -108,11 +108,12 @@ popMin (InternalNode currentKey currentItem leftChild rightChild)
 
 -- Count the entries in the BST for which the given predicate returns True.
 -- The predicate takes two parameters: the key and the item of an entry.
--- Cycle 16: now recurses through the tree, counting every entry. The
--- predicate is not yet consulted; Cycle 17 will force that.
+-- Walks the entire tree, summing the contributions of each subtree
+-- together with 1 for the current node if it matches, or 0 if it does not.
 countMatching :: (key -> item -> Bool) -> BST key item -> Int
 countMatching predicate Leaf = 0
 countMatching predicate (InternalNode currentKey currentItem leftChild rightChild)
     = let countInLeft  = countMatching predicate leftChild
           countInRight = countMatching predicate rightChild
-       in 1 + countInLeft + countInRight
+          currentMatch = if predicate currentKey currentItem then 1 else 0
+       in currentMatch + countInLeft + countInRight
