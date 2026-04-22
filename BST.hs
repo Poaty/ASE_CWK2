@@ -11,6 +11,7 @@ import Prelude hiding (lookup)
 -- subtree is strictly greater.
 data BST key item = Leaf
                   | InternalNode key item (BST key item) (BST key item)
+    deriving (Eq, Show)
 
 
 -- Construct an empty BST containing no entries.
@@ -104,6 +105,21 @@ popMin (InternalNode currentKey currentItem Leaf rightChild)
 popMin (InternalNode currentKey currentItem leftChild rightChild)
     = let (minKey, minItem, leftWithoutMin) = popMin leftChild
        in (minKey, minItem, InternalNode currentKey currentItem leftWithoutMin rightChild)
+
+
+-- Rotate a binary search tree to the right.
+-- This promotes the root's left child to become the new root. The
+-- previous root becomes the right child of the new root, and the
+-- previous left child's right subtree slots in as the new root's left
+-- child's right subtree (i.e. as the previous root's new left subtree).
+-- Cycle 18 minimum: only the case where the tree has a non-empty left
+-- subtree is handled. Cycle 19 will force the no-rotation case.
+rotateRight :: BST key item -> BST key item
+rotateRight (InternalNode parentKey parentItem
+                          (InternalNode childKey childItem childLeft childRight)
+                          parentRight)
+    = let newRightSubtree = InternalNode parentKey parentItem childRight parentRight
+       in InternalNode childKey childItem childLeft newRightSubtree
 
 
 -- Count the entries in the BST for which the given predicate returns True.

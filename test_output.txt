@@ -1,7 +1,1 @@
-
-BSTTests.hs:121:10: error: [GHC-88464]
-    Variable not in scope:
-      rotateRight :: BST key20 String -> BST key21 String
-    |
-121 |         (rotateRight (insert 5 "five" (insert 10 "ten" empty))))
-    |          ^^^^^^^^^^^
+Cases: 26  Tried: 0  Errors: 0  Failures: 0Cases: 26  Tried: 1  Errors: 0  Failures: 0Cases: 26  Tried: 2  Errors: 0  Failures: 0Cases: 26  Tried: 3  Errors: 0  Failures: 0Cases: 26  Tried: 4  Errors: 0  Failures: 0Cases: 26  Tried: 5  Errors: 0  Failures: 0Cases: 26  Tried: 6  Errors: 0  Failures: 0Cases: 26  Tried: 7  Errors: 0  Failures: 0Cases: 26  Tried: 8  Errors: 0  Failures: 0Cases: 26  Tried: 9  Errors: 0  Failures: 0Cases: 26  Tried: 10  Errors: 0  Failures: 0Cases: 26  Tried: 11  Errors: 0  Failures: 0Cases: 26  Tried: 12  Errors: 0  Failures: 0Cases: 26  Tried: 13  Errors: 0  Failures: 0Cases: 26  Tried: 14  Errors: 0  Failures: 0Cases: 26  Tried: 15  Errors: 0  Failures: 0Cases: 26  Tried: 16  Errors: 0  Failures: 0Cases: 26  Tried: 17  Errors: 0  Failures: 0Cases: 26  Tried: 18  Errors: 0  Failures: 0Cases: 26  Tried: 19  Errors: 0  Failures: 0Cases: 26  Tried: 20  Errors: 0  Failures: 0Cases: 26  Tried: 21  Errors: 0  Failures: 0Cases: 26  Tried: 22  Errors: 0  Failures: 0Cases: 26  Tried: 23  Errors: 0  Failures: 0Cases: 26  Tried: 24  Errors: 0  Failures: 0Cases: 26  Tried: 25  Errors: 0  Failures: 0                                            Cases: 26  Tried: 26  Errors: 0  Failures: 0
