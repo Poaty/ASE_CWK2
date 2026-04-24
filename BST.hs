@@ -108,18 +108,19 @@ popMin (InternalNode currentKey currentItem leftChild rightChild)
 
 
 -- Rotate a binary search tree to the right.
--- This promotes the root's left child to become the new root. The
--- previous root becomes the right child of the new root, and the
--- previous left child's right subtree slots in as the new root's left
--- child's right subtree (i.e. as the previous root's new left subtree).
--- Cycle 18 minimum: only the case where the tree has a non-empty left
--- subtree is handled. Cycle 19 will force the no-rotation case.
+-- If the tree has a non-empty left child, that child is promoted to
+-- become the new root: the previous root becomes the new root's right
+-- child, and the previous left child's right subtree becomes the
+-- previous root's new left subtree. If the tree has no left child to
+-- promote (Leaf or InternalNode with a Leaf in the left position),
+-- the tree is returned unchanged.
 rotateRight :: BST key item -> BST key item
 rotateRight (InternalNode parentKey parentItem
                           (InternalNode childKey childItem childLeft childRight)
                           parentRight)
     = let newRightSubtree = InternalNode parentKey parentItem childRight parentRight
        in InternalNode childKey childItem childLeft newRightSubtree
+rotateRight anyOtherTree = anyOtherTree
 
 
 -- Count the entries in the BST for which the given predicate returns True.
