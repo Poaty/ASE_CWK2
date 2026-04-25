@@ -126,5 +126,9 @@ allTests = TestList [
 
     TestCase (assertEqual "rotateLeft promotes the right child to the root"
         (InternalNode 20 "twenty" (InternalNode 10 "ten" Leaf Leaf) Leaf)
-        (rotateLeft (insert 20 "twenty" (insert 10 "ten" empty))))
+        (rotateLeft (insert 20 "twenty" (insert 10 "ten" empty)))),
+
+    TestCase (assertEqual "rotateLeft on a tree without a right child returns it unchanged"
+        (insert 10 "ten" empty)
+        (rotateLeft (insert 10 "ten" empty)))
   ]
