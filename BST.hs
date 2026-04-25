@@ -123,6 +123,21 @@ rotateRight (InternalNode parentKey parentItem
 rotateRight anyOtherTree = anyOtherTree
 
 
+-- Rotate a binary search tree to the left.
+-- This is the mirror of rotateRight. If the tree has a non-empty right
+-- child, that child is promoted to become the new root: the previous
+-- root becomes the new root's left child, and the previous right child's
+-- left subtree becomes the previous root's new right subtree.
+-- Cycle 20 minimum: only the case where the tree has a non-empty right
+-- subtree is handled. Cycle 21 will force the no-rotation case.
+rotateLeft :: BST key item -> BST key item
+rotateLeft (InternalNode parentKey parentItem
+                         parentLeft
+                         (InternalNode childKey childItem childLeft childRight))
+    = let newLeftSubtree = InternalNode parentKey parentItem parentLeft childLeft
+       in InternalNode childKey childItem newLeftSubtree childRight
+
+
 -- Count the entries in the BST for which the given predicate returns True.
 -- The predicate takes two parameters: the key and the item of an entry.
 -- Walks the entire tree, summing the contributions of each subtree
