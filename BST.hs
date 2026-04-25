@@ -127,15 +127,16 @@ rotateRight anyOtherTree = anyOtherTree
 -- This is the mirror of rotateRight. If the tree has a non-empty right
 -- child, that child is promoted to become the new root: the previous
 -- root becomes the new root's left child, and the previous right child's
--- left subtree becomes the previous root's new right subtree.
--- Cycle 20 minimum: only the case where the tree has a non-empty right
--- subtree is handled. Cycle 21 will force the no-rotation case.
+-- left subtree becomes the previous root's new right subtree. If the
+-- tree has no right child to promote (Leaf or InternalNode with a Leaf
+-- in the right position), the tree is returned unchanged.
 rotateLeft :: BST key item -> BST key item
 rotateLeft (InternalNode parentKey parentItem
                          parentLeft
                          (InternalNode childKey childItem childLeft childRight))
     = let newLeftSubtree = InternalNode parentKey parentItem parentLeft childLeft
        in InternalNode childKey childItem newLeftSubtree childRight
+rotateLeft anyOtherTree = anyOtherTree
 
 
 -- Count the entries in the BST for which the given predicate returns True.
