@@ -18,6 +18,13 @@ prop_lookupDict_onEmpty_isNothing soughtKey =
     (lookupDict soughtKey emptyDict :: Maybe String) == Nothing
 
 
+-- Property: after inserting a (key, item) entry into the empty
+-- dictionary, looking up that same key should return Just the item.
+prop_lookupDict_afterInsert_returnsJust :: Int -> String -> Bool
+prop_lookupDict_afterInsert_returnsJust newKey newItem =
+    lookupDict newKey (insertDict newKey newItem emptyDict) == Just newItem
+
+
 -- ---------------------------------------------------------------------
 -- Test runner
 -- ---------------------------------------------------------------------
@@ -25,3 +32,4 @@ prop_lookupDict_onEmpty_isNothing soughtKey =
 main :: IO ()
 main = do
     quickCheck prop_lookupDict_onEmpty_isNothing
+    quickCheck prop_lookupDict_afterInsert_returnsJust

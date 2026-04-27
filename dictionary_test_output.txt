@@ -1,1 +1,8 @@
-+++ OK, passed 100 tests.
+
+DictionaryTests.hs:25:24: error: [GHC-88464]
+    Variable not in scope:
+      insertDict
+        :: Int -> String -> Dictionary key0 item0 -> Dictionary Int String
+   |
+25 |     lookupDict newKey (insertDict newKey newItem emptyDict) == Just newItem
+   |                        ^^^^^^^^^^
