@@ -1,0 +1,7 @@
+
+DictionaryTests.hs:7:1: error:
+    Could not find module ‘Dictionary’
+    Use -v (or `:set -v` in ghci) to see a list of the files searched for.
+  |
+7 | import Dictionary
+  | ^^^^^^^^^^^^^^^^^
