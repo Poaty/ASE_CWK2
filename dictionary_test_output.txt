@@ -1,2 +1,7 @@
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
+
+DictionaryTests.hs:35:29: error: [GHC-88464]
+    Variable not in scope:
+      displayDict :: Dictionary Int String -> [Char]
+   |
+35 |     show newKey `isInfixOf` displayDict (insertDict newKey newItem emptyDict)
+   |                             ^^^^^^^^^^^

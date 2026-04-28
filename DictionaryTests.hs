@@ -3,6 +3,7 @@ module DictionaryTests where
 -- QuickCheck provides the property-based testing framework used for
 -- exercising the encapsulated Dictionary module.
 import Test.QuickCheck
+import Data.List (isInfixOf)
 
 import Dictionary
 
@@ -25,6 +26,15 @@ prop_lookupDict_afterInsert_returnsJust newKey newItem =
     lookupDict newKey (insertDict newKey newItem emptyDict) == Just newItem
 
 
+-- Property: rendering a dictionary that contains one inserted entry
+-- should produce a string that mentions the inserted key. (We compare
+-- against `show newKey` because that is how the underlying renderer
+-- formats the key.)
+prop_displayDict_singletonContainsKey :: Int -> String -> Bool
+prop_displayDict_singletonContainsKey newKey newItem =
+    show newKey `isInfixOf` displayDict (insertDict newKey newItem emptyDict)
+
+
 -- ---------------------------------------------------------------------
 -- Test runner
 -- ---------------------------------------------------------------------
@@ -33,3 +43,4 @@ main :: IO ()
 main = do
     quickCheck prop_lookupDict_onEmpty_isNothing
     quickCheck prop_lookupDict_afterInsert_returnsJust
+    quickCheck prop_displayDict_singletonContainsKey
