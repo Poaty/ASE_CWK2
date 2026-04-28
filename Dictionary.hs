@@ -1,4 +1,4 @@
-module Dictionary (Dictionary, emptyDict, lookupDict) where
+module Dictionary (Dictionary, emptyDict, insertDict, lookupDict) where
 
 import Prelude hiding (lookup)
 import BST
@@ -17,9 +17,16 @@ emptyDict :: Dictionary key item
 emptyDict = Dictionary empty
 
 
+-- Insert a (key, item) entry into the dictionary. If the key already
+-- exists, its associated item is overwritten. Delegates to BST.insert,
+-- preserving the binary-search-tree invariant of the underlying tree.
+insertDict :: Ord key => key -> item -> Dictionary key item -> Dictionary key item
+insertDict newKey newItem (Dictionary theTree)
+    = Dictionary (insert newKey newItem theTree)
+
+
 -- Look up a key in the dictionary.
 -- Returns Just the associated item if the key exists, Nothing otherwise.
--- Cycle 22 minimum: every lookup returns Nothing. A future cycle will
--- force this to consult the underlying tree.
-lookupDict :: key -> Dictionary key item -> Maybe item
-lookupDict soughtKey anyDictionary = Nothing
+-- Delegates to BST.lookup.
+lookupDict :: Ord key => key -> Dictionary key item -> Maybe item
+lookupDict soughtKey (Dictionary theTree) = lookup soughtKey theTree
