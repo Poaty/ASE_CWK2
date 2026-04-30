@@ -1,7 +1,4 @@
-
-DictionaryTests.hs:43:17: error: [GHC-88464]
-    Variable not in scope:
-      removeDict :: Int -> Dictionary Int String -> Dictionary Int item0
-   |
-43 |                (removeDict keyToRemove (insertDict keyToRemove newItem emptyDict))
-   |                 ^^^^^^^^^^
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.

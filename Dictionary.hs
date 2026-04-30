@@ -1,4 +1,11 @@
-module Dictionary (Dictionary, emptyDict, insertDict, lookupDict, displayDict) where
+module Dictionary
+    ( Dictionary
+    , emptyDict
+    , insertDict
+    , lookupDict
+    , displayDict
+    , removeDict
+    ) where
 
 import Prelude hiding (lookup)
 import BST
@@ -36,3 +43,10 @@ lookupDict soughtKey (Dictionary theTree) = lookup soughtKey theTree
 -- order. Delegates to BST.displayEntries.
 displayDict :: (Show key, Show item) => Dictionary key item -> String
 displayDict (Dictionary theTree) = displayEntries theTree
+
+
+-- Remove the entry with the given key. If the key is not present, the
+-- dictionary is returned unchanged. Delegates to BST.remove.
+removeDict :: Ord key => key -> Dictionary key item -> Dictionary key item
+removeDict keyToRemove (Dictionary theTree)
+    = Dictionary (remove keyToRemove theTree)
