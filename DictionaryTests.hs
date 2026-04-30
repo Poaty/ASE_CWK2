@@ -35,6 +35,15 @@ prop_displayDict_singletonContainsKey newKey newItem =
     show newKey `isInfixOf` displayDict (insertDict newKey newItem emptyDict)
 
 
+-- Property: after inserting an entry and then removing it by key,
+-- looking up that key should once again return Nothing.
+prop_removeDict_afterInsert_isNothing :: Int -> String -> Bool
+prop_removeDict_afterInsert_isNothing keyToRemove newItem =
+    lookupDict keyToRemove
+               (removeDict keyToRemove (insertDict keyToRemove newItem emptyDict))
+        == Nothing
+
+
 -- ---------------------------------------------------------------------
 -- Test runner
 -- ---------------------------------------------------------------------
@@ -44,3 +53,4 @@ main = do
     quickCheck prop_lookupDict_onEmpty_isNothing
     quickCheck prop_lookupDict_afterInsert_returnsJust
     quickCheck prop_displayDict_singletonContainsKey
+    quickCheck prop_removeDict_afterInsert_isNothing
