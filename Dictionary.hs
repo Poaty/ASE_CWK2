@@ -1,4 +1,4 @@
-module Dictionary (Dictionary, emptyDict, insertDict, lookupDict) where
+module Dictionary (Dictionary, emptyDict, insertDict, lookupDict, displayDict) where
 
 import Prelude hiding (lookup)
 import BST
@@ -30,3 +30,9 @@ insertDict newKey newItem (Dictionary theTree)
 -- Delegates to BST.lookup.
 lookupDict :: Ord key => key -> Dictionary key item -> Maybe item
 lookupDict soughtKey (Dictionary theTree) = lookup soughtKey theTree
+
+
+-- Render every entry in the dictionary as a string, in ascending key
+-- order. Delegates to BST.displayEntries.
+displayDict :: (Show key, Show item) => Dictionary key item -> String
+displayDict (Dictionary theTree) = displayEntries theTree
