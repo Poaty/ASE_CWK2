@@ -11,8 +11,9 @@ import Prelude hiding (lookup)
 import BST
 
 
--- The Dictionary constructor is not in the export list, so the
--- underlying BST is hidden from callers.
+-- Dictionary constructor isnt exported, so callers cant pattern-match
+-- on the underlying tree. lets us swap the implementation later without
+-- breaking anything that already uses this module
 data Dictionary key item = Dictionary (BST key item)
 
 

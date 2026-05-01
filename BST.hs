@@ -3,8 +3,8 @@ module BST where
 import Prelude hiding (lookup)
 
 
--- A binary search tree. All keys in the left subtree are strictly less
--- than the node's key; all keys in the right subtree are strictly greater.
+-- keys in the left subtree are smaller than this node's key, keys in
+-- the right subtree are larger. invariant maintained by insert and remove
 data BST key item = Leaf
                   | InternalNode key item (BST key item) (BST key item)
     deriving (Eq, Show)
@@ -35,7 +35,8 @@ lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
     | otherwise              = Just currentItem
 
 
--- In-order traversal, so entries appear in ascending key order.
+-- in-order traversal so the output is already sorted by key — no need
+-- to sort the entries afterwards
 displayEntries :: (Show key, Show item) => BST key item -> String
 displayEntries Leaf = ""
 displayEntries (InternalNode currentKey currentItem leftChild rightChild)
@@ -57,9 +58,9 @@ remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
         removeCurrent leftChild rightChild
 
 
--- Stitch the two subtrees of a removed node back together. When both
--- children are non-empty, the in-order successor takes the removed
--- node's place.
+-- both children non-empty is the awkward case — promote the in-order
+-- successor (smallest key in the right subtree) so the BST invariant
+-- still holds without having to rearrange the rest of the tree
 removeCurrent :: BST key item -> BST key item -> BST key item
 removeCurrent Leaf rightChild = rightChild
 removeCurrent leftChild Leaf  = leftChild
@@ -68,7 +69,8 @@ removeCurrent leftChild rightChild
        in InternalNode successorKey successorItem leftChild rightWithoutMin
 
 
--- Precondition: input is non-empty.
+-- precondition: input is non-empty. crashes on Leaf — only called from
+-- removeCurrent which already guards both children being non-Leaf
 popMin :: BST key item -> (key, item, BST key item)
 popMin (InternalNode currentKey currentItem Leaf rightChild)
     = (currentKey, currentItem, rightChild)
@@ -77,7 +79,9 @@ popMin (InternalNode currentKey currentItem leftChild rightChild)
        in (minKey, minItem, InternalNode currentKey currentItem leftWithoutMin rightChild)
 
 
--- Returns the tree unchanged if there is no left child to promote.
+-- TODO: rotations arent wired into insert/remove — theyre here so a
+--  future self-balancing variant could call them. actually doing the
+--  balancing is out of scope for this assignment
 rotateRight :: BST key item -> BST key item
 rotateRight (InternalNode parentKey parentItem
                           (InternalNode childKey childItem childLeft childRight)
@@ -87,7 +91,6 @@ rotateRight (InternalNode parentKey parentItem
 rotateRight anyOtherTree = anyOtherTree
 
 
--- Mirror of rotateRight.
 rotateLeft :: BST key item -> BST key item
 rotateLeft (InternalNode parentKey parentItem
                          parentLeft
