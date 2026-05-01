@@ -3,8 +3,7 @@ module BST where
 import Prelude hiding (lookup)
 
 
--- keys in the left subtree are smaller than this node's key, keys in
--- the right subtree are larger. invariant maintained by insert and remove
+-- BST invariant: left subtree keys < this key < right subtree keys
 data BST key item = Leaf
                   | InternalNode key item (BST key item) (BST key item)
     deriving (Eq, Show)
@@ -35,8 +34,7 @@ lookup soughtKey (InternalNode currentKey currentItem leftChild rightChild)
     | otherwise              = Just currentItem
 
 
--- in-order traversal so the output is already sorted by key — no need
--- to sort the entries afterwards
+-- in-order traversal so the output is already sorted by key
 displayEntries :: (Show key, Show item) => BST key item -> String
 displayEntries Leaf = ""
 displayEntries (InternalNode currentKey currentItem leftChild rightChild)
@@ -58,9 +56,7 @@ remove keyToRemove (InternalNode currentKey currentItem leftChild rightChild)
         removeCurrent leftChild rightChild
 
 
--- both children non-empty is the awkward case — promote the in-order
--- successor (smallest key in the right subtree) so the BST invariant
--- still holds without having to rearrange the rest of the tree
+-- two-children case promotes the in-order successor to preserve the BST invariant
 removeCurrent :: BST key item -> BST key item -> BST key item
 removeCurrent Leaf rightChild = rightChild
 removeCurrent leftChild Leaf  = leftChild
@@ -69,8 +65,7 @@ removeCurrent leftChild rightChild
        in InternalNode successorKey successorItem leftChild rightWithoutMin
 
 
--- precondition: input is non-empty. crashes on Leaf — only called from
--- removeCurrent which already guards both children being non-Leaf
+-- precondition: non-empty. only called from removeCurrent which guards both children
 popMin :: BST key item -> (key, item, BST key item)
 popMin (InternalNode currentKey currentItem Leaf rightChild)
     = (currentKey, currentItem, rightChild)
@@ -79,9 +74,7 @@ popMin (InternalNode currentKey currentItem leftChild rightChild)
        in (minKey, minItem, InternalNode currentKey currentItem leftWithoutMin rightChild)
 
 
--- TODO: rotations arent wired into insert/remove — theyre here so a
---  future self-balancing variant could call them. actually doing the
---  balancing is out of scope for this assignment
+-- TODO: not wired into insert/remove — here for a future self-balancing variant
 rotateRight :: BST key item -> BST key item
 rotateRight (InternalNode parentKey parentItem
                           (InternalNode childKey childItem childLeft childRight)
